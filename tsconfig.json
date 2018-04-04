@@ -5,8 +5,8 @@
     "strict": true,
     "sourceMap": true,
     "pretty": true,
-    "outDir": "dist/",
-    "declaration": true
+    "outDir": "dist/cjs/"
   },
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+  "files": ["./src/index.ts"]
 }
