@@ -1,10 +1,13 @@
-const forced = process && process.env && process.env.FORCE_COLOR !== undefined;
-export const supportsColor =
-  forced ||
-  ((process &&
-    process.stdout &&
-    (!process.stdout.isTTY && process.env.VSCODE_PID)) ||
-    (process.stdout && process.stdout.isTTY));
+export let supportsColor = false;
+try {
+  supportsColor = !!(
+    process &&
+    ((process.env && process.env.FORCE_COLOR !== undefined) ||
+      (process.stdout && (!process.stdout.isTTY && process.env.VSCODE_PID)) ||
+      (process.stdout && process.stdout.isTTY))
+  );
+  // tslint:disable-next-line
+} catch (err) {}
 
 export const fn = (open: number, text: string, close: number) =>
   supportsColor ? `\u001B[${open}m${text}\u001B[${close}m` : text;
